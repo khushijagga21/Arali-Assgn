@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0070f3;
+  padding: 1rem 2rem;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.navLinks li a:hover {
+  text-decoration: underline;
+}
+
+.rightSection {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.email {
+  font-size: 0.9rem;
+}
+
+.logoutButton {
+  background: #ff4b4b;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background: #e03e3e;
+}
