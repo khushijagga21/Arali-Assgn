@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import Navbar from "@/components/Navbar";
-import styles from "./Permissions.module.css";
+import styles from "./permissions.module.css";
 
 
 export default function PermissionsPage() {
