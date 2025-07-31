@@ -67,7 +67,7 @@ export default function PermissionsPage() {
 
   return (
     <>
-      <Navbar userEmail={null} />
+    
       <div className={styles.container}>
         <h1 className={styles.title}>Manage Permissions</h1>
 
