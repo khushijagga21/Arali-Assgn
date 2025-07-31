@@ -4,13 +4,19 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./dashboard.module.css";
 
+type User = {
+  email: string;
+};
+
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     async function getUser() {
       const { data } = await supabase.auth.getUser();
-      setUser(data.user);
+      if (data?.user?.email) {
+        setUser({ email: data.user.email });
+      }
     }
     getUser();
   }, []);
@@ -22,6 +28,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
+      {/* Header Section */}
       <div className={styles.header}>
         <h1 className={styles.title}>RBAC Control Panel</h1>
         {user && <p className={styles.welcome}>Welcome, {user.email}</p>}
@@ -30,6 +37,7 @@ export default function Dashboard() {
         </button>
       </div>
 
+      {/* Card Navigation Section */}
       <div className={styles.cardGrid}>
         <a href="/roles" className={styles.card}>
           <h2>Manage Roles</h2>

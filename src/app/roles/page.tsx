@@ -2,18 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-
+import Navbar from "@/components/Navbar";
 import styles from "./roles.module.css";
 
+type Role = {
+  id: string;
+  name: string;
+};
+
 export default function RolesPage() {
-  const [roles, setRoles] = useState<any[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [roleName, setRoleName] = useState("");
-  const [editingRole, setEditingRole] = useState<any>(null);
+  const [editingRole, setEditingRole] = useState<Role | null>(null);
 
   // Fetch roles
   const fetchRoles = async () => {
     const { data, error } = await supabase.from("roles").select("*").order("created_at", { ascending: false });
-    if (!error) setRoles(data || []);
+    if (!error && data) setRoles(data as Role[]);
   };
 
   useEffect(() => {
@@ -31,13 +36,13 @@ export default function RolesPage() {
   };
 
   // Edit role
-  const startEdit = (role: any) => {
+  const startEdit = (role: Role) => {
     setEditingRole(role);
     setRoleName(role.name);
   };
 
   const updateRole = async () => {
-    if (!roleName) return;
+    if (!roleName || !editingRole) return;
     const { error } = await supabase.from("roles").update({ name: roleName }).eq("id", editingRole.id);
     if (!error) {
       setRoleName("");
@@ -54,9 +59,10 @@ export default function RolesPage() {
 
   return (
     <>
- 
+      <Navbar />
       <div className={styles.container}>
         <h1 className={styles.title}>Manage Roles</h1>
+
         <div className={styles.form}>
           <input
             type="text"
